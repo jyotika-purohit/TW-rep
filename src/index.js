@@ -1,29 +1,24 @@
-import React from 'react';
+import React  from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { Provider } from "react-redux";
-import thunk from "redux-thunk";
-import { applyMiddleware, createStore } from "redux";
-import allReducers from "./modules";
-import { composeWithDevTools } from "redux-devtools-extension";
-
-
-const middleware = [thunk];
-
-
-let store;
-  store = createStore(
-    allReducers,
-    composeWithDevTools(applyMiddleware(...middleware))
-  );
-
+import Routes from "./Containers/routes";
+import {
+  BrowserRouter as Router
+} from "react-router-dom";
+ 
+import { PersistGate } from 'redux-persist/integration/react'
+import { store,persistor } from "./configStore";
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
-  </Provider >,
+      <PersistGate loading={null} persistor={persistor}>
+        <Router>
+          <Routes/>
+        </Router>
+      </PersistGate>
+    </Provider>,
   document.getElementById('root')
 );
 
@@ -31,3 +26,4 @@ ReactDOM.render(
 // to log results (for example: reportWebVitals(console.log))
 // or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
+

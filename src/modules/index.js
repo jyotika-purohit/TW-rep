@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
 
-// import workout_exercise_groups from "./workoutExerciseGroups";
+import auth from "./auth";
 
 const rootReducer = combineReducers({
-//   workout_exercise_groups
+  auth
 });
 
 export default (state, action) => {
