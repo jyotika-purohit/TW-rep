@@ -23,12 +23,32 @@ class Signin extends Component{
     }
 
 
-    handleSignin = async () => {
+    handleSignin = async (e) => {
         try{
-            const {doSignin} = this.props;
+            e.preventDefault();
+
+            const {doSignIn , users = [],history,handleOnClick } = this.props;
+            handleOnClick(e);
             const {email='',password=''}=this.state;
-            const res = await doSignin({email,password});
-            message.success("Sign In Complete");
+            let flag=false;
+
+            for(let each of users){
+                const { email:mail,password:pass }=each || {};
+                if(email === mail && password === pass){
+                    const res = await doSignIn({email,password});
+                    message.success("Sign In Complete");
+                    flag=true;
+                    this.setState({email:'',password:''});
+                    history.push(`/`);
+                    break;
+                }
+            }
+
+            if(!flag){
+                message.error("User with credentials does not exist")
+            }
+
+           
         }catch(error){
             message.warn(error);
             console.log("error",{error});
@@ -37,6 +57,8 @@ class Signin extends Component{
     }
 
     render(){
+        const {email='',password=''}=this.state;
+        console.log("32428374682634872 =>>>>>>>>> ",{props:this.props});
         return (
             <div  style={{margin:"100px",width:"50%"}}  >
                 <div style={{fontSize:"16"}} >
@@ -46,6 +68,8 @@ class Signin extends Component{
                         <Input 
                             placeholder="Email"
                             onChange={this.updateEmail} 
+                            value={email}
+                            required
                             >
         
                         </Input>
@@ -54,6 +78,8 @@ class Signin extends Component{
                             placeholder="Password"
                             onChange={this.updatePassword}
                             style={{marginTop:"10px"}}
+                            value={password}
+                            required
                         >
                         </Input>
                         <Button type="primary"

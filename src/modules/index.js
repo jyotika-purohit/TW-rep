@@ -1,18 +1,16 @@
 import { combineReducers } from "redux";
 
 import auth from "./auth";
+import users from "./users";
+import documents from "./documents";
 
 const rootReducer = combineReducers({
-  auth
+  auth,
+  users,
+  documents
 });
 
 export default (state, action) => {
-  if (action.type === "SIGNING_OUT_COMPLETED") {
-    Object.keys(state).forEach(keys => {
-      if (keys !== "auth" && keys !== "countryCities") {
-        state[keys] = {};
-      }
-    });
-  }
+
   return rootReducer(state, action);
 };

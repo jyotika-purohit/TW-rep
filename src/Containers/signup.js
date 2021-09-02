@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
 import Signup from "../Components/Signup";
-import { doSignin } from "../modules/auth";
+import { doSignUp } from "../modules/users";
 
 const mapStateToProps = state => {
   const {
@@ -16,7 +16,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    doSignin : payload => dispatch(doSignin(payload))
+    doSignUp:payload => dispatch(doSignUp(payload))
   };
 };
 

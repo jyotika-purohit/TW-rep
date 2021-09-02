@@ -1,6 +1,7 @@
 export const SIGNIN_COMPLETE = "SIGNIN_COMPLETE";
+export const SIGNOUT_COMPLETE="SIGNOUT_COMPLETE";
 
-export const doSignin = payload => {
+export const doSignIn = payload => {
     let response = {};
     return async dispatch => {
         try {
@@ -11,14 +12,33 @@ export const doSignin = payload => {
             });
 
         } catch (error) {
-            console.log("SEARCH DEGREE MODULE catch error -> ", error);
+            console.log("sign in MODULE catch error -> ", error);
         }
         return response;
     }
 };
 
-function signinReducer(state, data) {
+
+export const doSignOut = () => {
+    let response = {};
+    return async dispatch => {
+        try {
+           
+            dispatch({
+                type: SIGNOUT_COMPLETE,
+                data:{}
+            });
+
+        } catch (error) {
+            console.log("sign out MODULE catch error -> ", error);
+        }
+        return response;
+    }
+};
+
+function signInReducer(state, data) {
     const {email='',password = ''}=data || {} ;
+
     const auth={
         email, 
         password
@@ -35,11 +55,19 @@ function signinReducer(state, data) {
     }
 }
 
+function signOutReducer(state, data) {
+
+    return {};
+        
+}
+
 export default (state = {}, action) => {
     const { type, data } = action;
     switch (type) {
         case SIGNIN_COMPLETE:
-            return signinReducer(state, data);
+            return signInReducer(state, data);
+        case SIGNOUT_COMPLETE:
+            return signOutReducer(state, data);
         default:
             return state;
     }

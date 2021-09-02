@@ -1,24 +1,27 @@
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import Routes from "../Routes/index";
-import { doSignIn } from "../modules/auth";
+import Header from "../Components/Header";
+import { doSignOut } from "../modules/auth";
 
 const mapStateToProps = state => {
   const {
-      auth = {}
+      auth = {},
+      users = {}
   } = state;
   
 
   return {
-    auth
+    auth,
+    users
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
+    doSignOut : () => dispatch(doSignOut()),
   };
 };
 
 export default withRouter(
-  connect(mapStateToProps, mapDispatchToProps)(Routes)
+  connect(mapStateToProps, mapDispatchToProps)(Header)
 );

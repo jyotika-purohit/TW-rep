@@ -1,11 +1,12 @@
 import logo from './logo.svg';
 import './App.css';
 import 'antd/dist/antd.css';
+import DocumentTable from "./Containers/documentsTable";
 
-function App() {
+function App(props) {
   return (
     <div className="App">
-      Default Loader
+      <DocumentTable {...props} />
       {/* <header className="App-header">
         <img src={logo} className="App-logo" alt="logo" />
         <p>
