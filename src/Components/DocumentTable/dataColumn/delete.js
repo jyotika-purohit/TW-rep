@@ -6,7 +6,7 @@ export default props => {
   const { action, id } = props || {};
 
   return (
-    <Tooltip placement="bottom" title={"Edit"}>
+    <Tooltip placement="bottom" title={"Delete"}>
       <div className="p10" onClick={action(id)}>
         <div className="flex align-center justify-center">
        
